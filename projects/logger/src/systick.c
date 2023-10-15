@@ -5,7 +5,7 @@ void Systick_Init(uint32_t s)
     // Clear CTRL register
     SysTick->CTRL = 0x00000;
 
-    // Main clock source is running with HSI by default which is at 16 mhz.
+    // Main clock source is running with HSI by default which is at 16Mhz.
     // SysTick clock source can be set with CTRL register (Bit 2)
     // 0: Processor clock/8 (AHB/8)
     // 1: Processor clock (AHB)
@@ -19,7 +19,7 @@ void Systick_Init(uint32_t s)
 
     // Set the current value to 0
     SysTick->VAL = 0;
-    
+
     // Enable SysTick (bit 0)
     __setbit(SysTick->CTRL, 0);
 }
