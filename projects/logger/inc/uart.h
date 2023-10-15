@@ -4,7 +4,7 @@
 #include "main.h"
 
 void UART_Init(void);
-void transmitString( char * buffer );
+void UART_Transmit_String( char * buffer );
 void put_char(uint32_t ch);
 
 #endif /* __UART_H */

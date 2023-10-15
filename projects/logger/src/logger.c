@@ -1,23 +1,24 @@
 #include "logger.h"
 #include "uart.h"
+#include "systick.h"
 
-extern LogEntry infoLogBuffer[LOG_MAX_ENTRIES];
-extern LogEntry warningLogBuffer[LOG_MAX_ENTRIES];
-extern LogEntry errorLogBuffer[LOG_MAX_ENTRIES];
-extern LogEntry criticalLogBuffer[LOG_MAX_ENTRIES];
+LogEntry infoLogBuffer[LOG_MAX_ENTRIES];
+LogEntry warningLogBuffer[LOG_MAX_ENTRIES];
+LogEntry errorLogBuffer[LOG_MAX_ENTRIES];
+LogEntry criticalLogBuffer[LOG_MAX_ENTRIES];
 
-extern uint8_t infoLogIndex;
-extern uint8_t warningLogIndex;
-extern uint8_t errorLogIndex;
-extern uint8_t criticalLogIndex;
+uint8_t infoLogIndex = 0;
+uint8_t warningLogIndex = 0;
+uint8_t errorLogIndex = 0;
+uint8_t criticalLogIndex = 0;
 
-extern char logOutput[LOG_OUTPUT_LENGHT];
+char logOutput[LOG_OUTPUT_LENGHT];
 
 void logger(LogLevel level, uint32_t logID, const char *message) {
     LogEntry entry;
     memset(&logOutput, '\0', LOG_OUTPUT_LENGHT);
 
-    entry.timestamp = 0; // Replace with your timestamp logic
+    entry.timestamp = get_tick();
     entry.level = level;
     entry.logID = logID;
     strncpy(entry.message, message, sizeof(entry.message));
@@ -41,9 +42,11 @@ void logger(LogLevel level, uint32_t logID, const char *message) {
 
     // Store the log entry in the circular buffer
     logBuffer[*logIndex] = entry;
+    
+    // Stream the log over UART2
     sprintf(logOutput, "Timestamp: %lu | Log Level: %s | Log ID: %lu | Message: %s\n",
                         entry.timestamp, LogLevelTags[entry.level], entry.logID, entry.message);
+    UART_Transmit_String(logOutput);
 
-    transmitString(logOutput);
-    *logIndex = (*logIndex + 1) % LOG_MAX_ENTRIES;
+    *logIndex = (uint8_t) (*logIndex + 1) % LOG_MAX_ENTRIES;
 }

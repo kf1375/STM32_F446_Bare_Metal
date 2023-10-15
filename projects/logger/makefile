@@ -1,10 +1,11 @@
-TARGET = uart_rx_interrupt
+TARGET = logger
 
 INCLUDES += -I inc/
 
 SRCS += src/main.c
 SRCS += src/uart.c
 SRCS += src/logger.c
+SRCS += src/systick.c
 
 LINKER_SCRIPT = ../../flash/STM32F446RETX_FLASH.ld
 

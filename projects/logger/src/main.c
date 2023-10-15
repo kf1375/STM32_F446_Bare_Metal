@@ -29,31 +29,29 @@ STEPS:
     3. In ISR transmit back Data
 *************************************************************/
 #include "main.h"
+#include "systick.h"
 #include "uart.h"
 #include "logger.h"
-
-LogEntry infoLogBuffer[LOG_MAX_ENTRIES];
-LogEntry warningLogBuffer[LOG_MAX_ENTRIES];
-LogEntry errorLogBuffer[LOG_MAX_ENTRIES];
-LogEntry criticalLogBuffer[LOG_MAX_ENTRIES];
-
-uint8_t infoLogIndex = 0;
-uint8_t warningLogIndex = 0;
-uint8_t errorLogIndex = 0;
-uint8_t criticalLogIndex = 0;
-
-char logOutput[LOG_OUTPUT_LENGHT];
 
 /*************************************************
 * main code starts from here
 *************************************************/
 int main(void)
 {
+    Systick_Init(SystemCoreClock/1000);
+
     UART_Init();
 
-    logger(LOG_INFO, 1, "Jinx");
-    logger(LOG_INFO, 2, "Hey Dude");
-
+    logger(LOG_INFO, 1, "This is an Info");
+    logger(LOG_INFO, 2, "This is another Info");
+    delay_ms(1000);
+    logger(LOG_WARNING, 1, "This is a Warning");
+    logger(LOG_WARNING, 2, "This is another Warning");
+    delay_ms(1000);
+    logger(LOG_ERROR, 1, "This is a Error");
+    logger(LOG_ERROR, 2, "This is another Error");
+    delay_ms(1000);
+    
     while(1)
     {
 

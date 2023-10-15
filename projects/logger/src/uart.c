@@ -56,6 +56,8 @@ void UART_Init(void)
     GPIOA->MODER &= ~(0xFU << 4); // Reset bits 4:5 for PA2 and 6:7 for PA3
     GPIOA->MODER |=  (0xAU << 4); // Set   bits 4:5 for PA2 and 6:7 for PA3 to alternate mode (10)
 
+
+    // !!! slow down !!!
     // set pin modes as high speed
     GPIOA->OSPEEDR |= 0x000000A0; // Set pin 2/3 to high speed mode (0b10)
 
@@ -183,10 +185,11 @@ void UART_Init(void)
     NVIC_EnableIRQ(USART2_IRQn);
 }
 
-void transmitString( char * buffer ) {
+void UART_Transmit_String( char * buffer ) {
 
     volatile int i = 0;
     
+    // Check Size 
     while ( buffer[i] != '\0' ) {
       put_char(buffer[i]);
       ++i;
