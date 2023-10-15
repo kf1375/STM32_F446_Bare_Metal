@@ -14,7 +14,8 @@ uint8_t criticalLogIndex = 0;
 
 char logOutput[LOG_OUTPUT_LENGHT];
 
-void logger(LogLevel level, uint32_t logID, const char *message) {
+void logger(LogLevel level, uint32_t logID, const char *message)
+{
     LogEntry entry;
     memset(&logOutput, '\0', LOG_OUTPUT_LENGHT);
 
@@ -46,6 +47,7 @@ void logger(LogLevel level, uint32_t logID, const char *message) {
     // Stream the log over UART2
     sprintf(logOutput, "Timestamp: %lu | Log Level: %s | Log ID: %lu | Message: %s\n",
                         entry.timestamp, LogLevelTags[entry.level], entry.logID, entry.message);
+                        
     UART_Transmit_String(logOutput);
 
     *logIndex = (uint8_t) (*logIndex + 1) % LOG_MAX_ENTRIES;

@@ -32,6 +32,7 @@ uint32_t get_tick(void)
     __enable_irq();
     return _tick;
 }
+
 //Delay generation
 void delay_ms(uint32_t m_seconds)
 {

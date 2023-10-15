@@ -1,14 +1,10 @@
 /*
 @author:    Kazem
 
-@descp:     This Program configures USART2 for asynchronous
-            communication with 9600 baudrate.
+@descp:     This Program implement a simple logging modudle and 
+            configures Systick and USART2 for streaming logs.
             PA2 ----> Tx
             PA3 ----> Rx
-            
-@Method:    Interrupt based reception
-
-@warrenty:  void
 */
 /**************************************************************
 REQUIREMENTS:
@@ -19,14 +15,14 @@ REQUIREMENTS:
 ***************************************************************/
 
 /*  
-    Web Link: 
+    Web Link: https://github.com/kf1375/STM32_F446_Bare_Metal/tree/main/projects/logger
 */
 
 /*************************************************************
 STEPS:
-    1. Configure GPIOs to have alternate function
+    1. Configure Systick to have milisecond timestamp
     2. Configure UART
-    3. In ISR transmit back Data
+    3. Set various logs and stream them over UART
 *************************************************************/
 #include "main.h"
 #include "systick.h"
@@ -51,7 +47,7 @@ int main(void)
     logger(LOG_ERROR, 1, "This is a Error");
     logger(LOG_ERROR, 2, "This is another Error");
     delay_ms(1000);
-    
+
     while(1)
     {
 
