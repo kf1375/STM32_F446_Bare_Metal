@@ -3,8 +3,8 @@
 
 #include "main.h"
 
-void initUSART(void);
-void put_char(uint32_t ch); 
+void UART_Init(void);
 void transmitString( char * buffer );
+void put_char(uint32_t ch);
 
 #endif /* __UART_H */

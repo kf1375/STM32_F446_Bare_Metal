@@ -1,6 +1,6 @@
 #include "uart.h"
 
-void initUSART(void)
+void UART_Init(void)
 {
     /*
         USART2 Pins:
@@ -177,7 +177,7 @@ void initUSART(void)
     __setbit(USART2->CR1,5);
     
     /*
-      Allow NVIC to acknowledge USART3 interrupt
+      Allow NVIC to acknowledge USART2 interrupt
     */
 
     NVIC_EnableIRQ(USART2_IRQn);
@@ -204,12 +204,25 @@ void put_char(uint32_t ch) {
   
 }
 
-void USART2_IRQHandler (void) {  
+// Override the default C '_write' method to implement 'printf' over UART.
+int _write(int file, char* data, int size)
+{
+    (void)file;
+    int count = size;
+    while(count--) 
+    {
+        while(!( USART2->SR & USART_SR_TXE)) {};
+        USART2->DR = *data++;
+    }
+    return size;
+}
+
+void USART2_IRQHandler (void)
+{  
   
   /*
     read contents from USART2 data register
     and transmit it back
   */
   
-  put_char(USART2->DR);
 }

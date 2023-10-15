@@ -2,6 +2,7 @@
 #define __MAIN_H
 
 #include <stdint.h>
+#include <stdio.h>
 #include "stm32f4xx.h"
 
 #define __setbit(___reg, ___bit)      ((___reg) |= (1U << (___bit)))

@@ -110,7 +110,7 @@ debug:
 	 $(OBJDIR)/$(TARGET).elf
 
 burn:
-	@st-flash write $(OBJDIR)/$(TARGET).bin 0x8000000
+	@STM32_Programmer_CLI -c port=swd -w $(OBJDIR)/$(TARGET).elf -v -rst
 
 clean:
 	@echo "Cleaning..."
