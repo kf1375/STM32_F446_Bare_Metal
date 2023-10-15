@@ -3,9 +3,8 @@
 
 @descp:     This Program implement a simple logging modudle and 
             configures Systick and USART2 for streaming logs.
-            PA2 ----> Tx
-            PA3 ----> Rx
 */
+
 /**************************************************************
 REQUIREMENTS:
     1. 9600 baud rate
@@ -24,6 +23,7 @@ STEPS:
     2. Configure UART
     3. Set various logs and stream them over UART
 *************************************************************/
+
 #include "main.h"
 #include "systick.h"
 #include "uart.h"
