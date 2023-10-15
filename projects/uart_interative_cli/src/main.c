@@ -1,10 +1,9 @@
 /*
 @author:    Kazem
 
-@descp:     This Program implement a simple logging modudle and 
-            configures Systick and USART2 for streaming logs.
+@descp:     This Program implement a interactive command-line
+            over UART2.
 */
-
 /**************************************************************
 REQUIREMENTS:
     1. 9600 baud rate
@@ -14,7 +13,7 @@ REQUIREMENTS:
 ***************************************************************/
 
 /*  
-    Web Link: https://github.com/kf1375/STM32_F446_Bare_Metal/tree/main/projects/uart_interative_cli
+    Web Link: https://github.com/kf1375/STM32_F446_Bare_Metal/tree/main/projects/logger
 */
 
 /*************************************************************
@@ -23,7 +22,6 @@ STEPS:
     2. Configure UART
     3. Set various logs and stream them over UART
 *************************************************************/
-
 #include "main.h"
 #include "systick.h"
 #include "uart.h"
