@@ -25,8 +25,10 @@ STEPS:
 #include "main.h"
 #include "systick.h"
 #include "uart.h"
-#include "logger.h"
+#include "parser.h"
 
+char rxBuffer[MAX_INPUT_SIZE];
+volatile uint8_t line_received = 0;
 /*************************************************
 * main code starts from here
 *************************************************/
@@ -35,19 +37,13 @@ int main(void)
     Systick_Init(SystemCoreClock/1000);
 
     UART_Init();
-
-    logger(LOG_INFO, 1, "This is an Info");
-    logger(LOG_INFO, 2, "This is another Info");
-    delay_ms(1000);
-    logger(LOG_WARNING, 1, "This is a Warning");
-    logger(LOG_WARNING, 2, "This is another Warning");
-    delay_ms(1000);
-    logger(LOG_ERROR, 1, "This is a Error");
-    logger(LOG_ERROR, 2, "This is another Error");
-    delay_ms(1000);
-
+    UART_Transmit_String("Jinx");
     while(1)
     {
-
+        if(line_received)
+        {
+            line_received = 0;
+            process_command(rxBuffer);
+        }
     }
 }

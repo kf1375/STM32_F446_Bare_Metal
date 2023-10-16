@@ -5,6 +5,7 @@ INCLUDES += -I inc/
 SRCS += src/main.c
 SRCS += src/uart.c
 SRCS += src/systick.c
+SRCS += src/parser.c
 
 LINKER_SCRIPT = ../../flash/STM32F446RETX_FLASH.ld
 
