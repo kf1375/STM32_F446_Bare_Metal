@@ -43,12 +43,14 @@ void process_command(char* command)
 
 void set_callback(char** args, uint8_t numArgs)
 {
+    (void)numArgs;
     char response[128];
     snprintf(response, sizeof(response), "Setting %s to %s\r\n", args[0], args[1]);
     UART_Transmit_String(response);
 }
 void get_callback(char** args, uint8_t numArgs)
 {
+    (void)numArgs;
     char response[128];
     snprintf(response, sizeof(response), "Getting %s value\r\n", args[0]);
     UART_Transmit_String(response);
@@ -56,6 +58,7 @@ void get_callback(char** args, uint8_t numArgs)
 
 void write_callback(char** args, uint8_t numArgs)
 {
+    (void)numArgs;
     char response[128];
     snprintf(response, sizeof(response), "Writing values: %s, %s, %s, %s, %s\r\n", args[0], args[1], args[2], args[3], args[4]);
     UART_Transmit_String(response);
