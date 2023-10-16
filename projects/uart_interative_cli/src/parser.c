@@ -8,28 +8,6 @@ Command commandList[] = {
     // Add more commands here
 };
 
-void parse_command(char* input, char* command, char* arguments[], const char* separator)
-{
-    char* token;
-    int argIndex = 0;
-
-    // Extract the command
-    token = strtok(input, separator);
-    if (token) {
-        strncpy(command, token, MAX_INPUT_SIZE);
-    }
-
-    // Extract arguments
-    while ((token = strtok(NULL, separator)) != NULL) {
-        if (argIndex < MAX_ARGUMENTS) {
-            arguments[argIndex] = token;
-            argIndex++;
-        } else {
-            break;
-        }
-    }
-}
-
 void process_command(char* command)
 {
     char* tokens[6]; // Assuming a maximum of 6 tokens (command + 5 arguments)
@@ -48,12 +26,12 @@ void process_command(char* command)
         if (strcmp(tokens[0], commandList[i].command) == 0) {
             // Check if the number of arguments matches the expected number
             if (numTokens - 1 == commandList[i].numArgs) {
-                // Call the command's callback function with arguments
+                // Call the command callback function with arguments
                 commandList[i].callback(tokens + 1, numTokens - 1);
                 return;
             } else {
                 // Handle argument count mismatch
-                UART_Transmit_String("Argument count mismatch for command.\r\n");
+                UART_Transmit_String("Argument count mismatch.\r\n");
                 return;
             }
         }

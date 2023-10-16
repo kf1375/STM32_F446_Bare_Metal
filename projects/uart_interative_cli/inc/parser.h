@@ -18,8 +18,7 @@ typedef struct {
 void set_callback(char** args, uint8_t numArgs);
 void get_callback(char** args, uint8_t numArgs);
 void write_callback(char** args, uint8_t numArgs);
-
-// Add more command callback functions as needed
+// Add more command callback functions here
 
 void process_command(char* command);
 

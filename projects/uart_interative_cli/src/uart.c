@@ -53,13 +53,13 @@ void UART_Init(void)
     __clearbit(GPIOA->MODER, 2);
     __setbit(GPIOA->MODER, 3);
 
-    // Connect PA2 Pin to USART. AF7 (UART2 Function)
+    // Connect PA2 Pin to USART. AF7 (UART4 Function)
     __clearbit(GPIOA->AFR[0], 0);
     __clearbit(GPIOA->AFR[0], 1);
     __clearbit(GPIOA->AFR[0], 2);    
     __setbit(GPIOA->AFR[0], 3);
 
-    // Connect PA3 Pin to USART. AF7 (UART2 Function)
+    // Connect PA3 Pin to USART. AF7 (UART4 Function)
     __clearbit(GPIOA->AFR[0], 4);
     __clearbit(GPIOA->AFR[0], 5);
     __clearbit(GPIOA->AFR[0], 6);
@@ -70,11 +70,11 @@ void UART_Init(void)
         The final step is to Configure USART Moduele
     */
 
-    // Before we can use UART2, clock must be enable to it.  
+    // Before we can use UART4, clock must be enable to it.  
     __setbit(RCC->APB1ENR, 19);
 
     /*
-        By default the clock to USART2 is High Speed Internal clock 
+        By default the clock to UART4 is High Speed Internal clock 
         HSI = 16Mhz
         
         Baudrate =  Fclk/ 8 x ( 2 - Over8 ) x USARTDIV
@@ -118,13 +118,13 @@ void UART_Init(void)
     __setbit(UART4->CR1 , 2);
     __setbit(UART4->CR1 , 3);
 
-    // Finally powerup USART2 module
+    // Finally powerup UART4 module
     __setbit(UART4->CR1 , 13);  
 
     // enable Rx interrupt
     __setbit(UART4->CR1, 5);
     
-    // Allow NVIC to acknowledge USART2 interrupt
+    // Allow NVIC to acknowledge UART4 interrupt
     NVIC_EnableIRQ(UART4_IRQn);
 }
 
