@@ -1,10 +1,4 @@
 #include "uart.h"
-#include "parser.h"
-
-extern char rxBuffer[MAX_INPUT_SIZE];
-extern volatile uint8_t line_received;
-
-uint16_t rxIndex = 0;
 
 void UART_Init(void)
 {
