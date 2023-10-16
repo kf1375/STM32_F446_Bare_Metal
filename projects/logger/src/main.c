@@ -2,7 +2,7 @@
 @author:    Kazem
 
 @descp:     This Program implement a simple logging modudle and 
-            configures Systick and USART2 for streaming logs.
+            configures Systick and UART4 for streaming logs.
 */
 
 /**************************************************************
