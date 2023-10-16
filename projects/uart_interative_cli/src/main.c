@@ -37,7 +37,7 @@ int main(void)
     Systick_Init(SystemCoreClock/1000);
 
     UART_Init();
-    UART_Transmit_String("Jinx");
+    
     while(1)
     {
         if(line_received)
