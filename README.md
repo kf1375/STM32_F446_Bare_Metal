@@ -8,7 +8,7 @@ Common startup functions are located in the `include/startup_stm32f446retx.s` an
 The repository includes `CMSIS` as submodules under `lib` folder. You can clone the repository, then initialize and update the submodules with `git submodule init` and `git submodule update` commands.
 
 ## Compile
-[makefile](projects/armf4.mk) contains necessary build scripts and compiler flags for all projects. Individual settings can be changed from local makefiles from projects such as [blinky makefile](projects/logger/makefile)
+[makefile](projects/armf4.mk) contains necessary build scripts and compiler flags for all projects. Individual settings can be changed from local makefiles from projects such as [logger makefile](projects/logger/makefile)
 
 Browse into any directory and run `make` to compile.
 ```
